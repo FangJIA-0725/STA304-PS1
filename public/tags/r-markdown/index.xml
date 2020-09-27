@@ -8,14 +8,12 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 24 Sep 2020 21:13:14 -0500</lastBuildDate><atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>302 ps1</title>
-      <link>/2020/09/24/302-ps1/</link>
+      <title>The relationship between the population of each neighborhood and counts of break and enter in 2016.</title>
+      <link>/2020/09/24/the-relationship-between-the-population-of-each-neighborhood-and-counts-of-break-and-enter-in-2016./</link>
       <pubDate>Thu, 24 Sep 2020 21:13:14 -0500</pubDate>
       
-      <guid>/2020/09/24/302-ps1/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>/2020/09/24/the-relationship-between-the-population-of-each-neighborhood-and-counts-of-break-and-enter-in-2016./</guid>
+      <description>Part I Introduction In this experiment, we focus on analyzing the relationship between two numerical variables. We select two interesting variables from the data we found on the Toronto Open Data Portal. Y is the counts of break and enter in 2016. X is the population of each neighborhood in 2016. We assume a relationship between (counts of break and enter in 2016) and each neighborhood’s population in 2016.</description>
     </item>
     
   </channel>
