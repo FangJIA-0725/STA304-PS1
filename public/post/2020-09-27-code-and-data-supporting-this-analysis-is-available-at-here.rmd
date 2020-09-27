@@ -1,0 +1,44 @@
+---
+title: code and data supporting this analysis is available at here
+author: "Fang Jia"
+date: '2020-09-27'
+slug: code-and-data-supporting-this-analysis-is-available-at-here
+categories: []
+tags: []
+---
+```{r}
+library(opendatatoronto)
+library(dplyr)
+
+
+# get package
+package <- show_package("fc4d95a6-591f-411f-af17-327e6c5d03c7")
+package
+
+# get all resources for this package
+resources <- list_package_resources("fc4d95a6-591f-411f-af17-327e6c5d03c7")
+
+# identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources
+datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'))
+
+# load the first datastore resource as a sample
+data <- filter(datastore_resources, row_number()==1) %>% get_resource()
+data
+
+glimpse(data)
+```
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+
+Histogram <- ggplot(data = data, aes(x = BreakandEnter_2016)) + geom_histogram(color = "blue", fill = "white", bins = 30)
+Histogram + labs(x = "counts of break and enter for 2016", title = "The distribution of counts of break and enter for 2016" )
+
+ scatter_plot <- ggplot(data, aes(x=Population, y=BreakandEnter_2016)) + 
+  geom_point(shape=18, color="blue")+
+  geom_smooth(method=lm,  linetype="dashed",
+             color="darkred", fill="blue")
+ scatter_plot + labs(x = "Population of each Neighbourhood in 2016", y = "counts of break and enter for 2016", title = "The relationship between Population and counts of break and enter for 2016")
+```
+

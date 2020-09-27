@@ -158,6 +158,7 @@ Using the above scatter plot, we find the relationship between population and (c
 # Reference 
 
 1.Open Data Catalogue. (n.d.). Retrieved September 27, 2020, from https://open.toronto.ca/catalogue/?search=crime 
+
 2.A Complete Guide to Scatter Plots. (n.d.). Retrieved September 27, 2020, from https://chartio.com/learn/charts/what-is-a-scatter-plot/
 
 

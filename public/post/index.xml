@@ -8,12 +8,12 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 27 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>inclass example page 2</title>
-      <link>/2020/09/27/inclass-example-page-2/</link>
+      <title>code and data supporting this analysis is available at here</title>
+      <link>/2020/09/27/code-and-data-supporting-this-analysis-is-available-at-here/</link>
       <pubDate>Sun, 27 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/09/27/inclass-example-page-2/</guid>
-      <description></description>
+      <guid>/2020/09/27/code-and-data-supporting-this-analysis-is-available-at-here/</guid>
+      <description>library(opendatatoronto) library(dplyr) ## ## Attaching package: &amp;#39;dplyr&amp;#39; ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## filter, lag ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## intersect, setdiff, setequal, union # get package package &amp;lt;- show_package(&amp;quot;fc4d95a6-591f-411f-af17-327e6c5d03c7&amp;quot;) package ## # A tibble: 1 x 10 ## title id topics civic_issues excerpt dataset_category num_resources formats ## &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt; ## 1 Neig… fc4d… &amp;lt;NA&amp;gt; &amp;lt;NA&amp;gt; &amp;lt;NA&amp;gt; &amp;lt;NA&amp;gt; 1 &amp;lt;NA&amp;gt; ## # … with 2 more variables: refresh_rate &amp;lt;chr&amp;gt;, last_refreshed &amp;lt;date&amp;gt; # get all resources for this package resources &amp;lt;- list_package_resources(&amp;quot;fc4d95a6-591f-411f-af17-327e6c5d03c7&amp;quot;) # identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources datastore_resources &amp;lt;- filter(resources, tolower(format) %in% c(&amp;#39;csv&amp;#39;, &amp;#39;geojson&amp;#39;)) # load the first datastore resource as a sample data &amp;lt;- filter(datastore_resources, row_number()==1) %&amp;gt;% get_resource() data ## Simple feature collection with 140 features and 61 fields ## geometry type: POLYGON ## dimension: XY ## bbox: xmin: -79.</description>
     </item>
     
     <item>
@@ -23,25 +23,6 @@
       
       <guid>/2020/09/24/the-relationship-between-the-population-of-each-neighborhood-and-counts-of-break-and-enter-in-2016./</guid>
       <description>Part I Introduction In this experiment, we focus on analyzing the relationship between two numerical variables. We select two interesting variables from the data we found on the Toronto Open Data Portal. Y is the counts of break and enter in 2016. X is the population of each neighborhood in 2016. We assume a relationship between (counts of break and enter in 2016) and each neighborhood’s population in 2016.</description>
-    </item>
-    
-    <item>
-      <title>A Plain Markdown Post</title>
-      <link>/2016/12/30/a-plain-markdown-post/</link>
-      <pubDate>Fri, 30 Dec 2016 21:49:57 -0700</pubDate>
-      
-      <guid>/2016/12/30/a-plain-markdown-post/</guid>
-      <description>This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
- You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.  There are many differences in syntax between Blackfriday&amp;rsquo;s Markdown and Pandoc&amp;rsquo;s Markdown.</description>
-    </item>
-    
-    <item>
-      <title>Lorem Ipsum</title>
-      <link>/2015/01/01/lorem-ipsum/</link>
-      <pubDate>Thu, 01 Jan 2015 13:09:13 -0600</pubDate>
-      
-      <guid>/2015/01/01/lorem-ipsum/</guid>
-      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
     </item>
     
   </channel>
