@@ -13,33 +13,40 @@ knitr::opts_chunk$set(collapse = TRUE)
 ```
 # Part I Introduction
 
-In this experiment, we focus on analyzing the relationship between two numerical variables. We select two interesting variables from the data we found on the Toronto Open Data Portal. Y is the counts of break and enter in 2016. X is the population of each neighborhood in 2016. We assume a relationship between (counts of break and enter in 2016) and each neighborhood's population in 2016. 
+In this experiment, we focus on analyzing the relationship between two numerical variables. We select two interesting variables from the data we found on the Toronto Open Data Portal. Y is the counts of break and enter in 2016. X is the population of each neighborhood in 2016. We assume there is a relationship between (counts of break and enter in 2016) and each neighborhood's population in 2016. 
 
-Firstly, we create a histogram of counts of break and enter in 2016. It shows the distribution, center, and spread. Secondly, we make a scatter plot of (counts of break and enter in 2016) and each neighborhood population in 2016. It tells the association between (counts of break and enter in 2016)  and each neighborhood's population in 2016. From the above graphs, we could tell whether there is a relationship between X and Y.
+Firstly, we create a histogram of counts of break and enter in 2016. It shows the distribution, center, and spread. Secondly, we make a scatter plot of (counts of break and enter in 2016) and each neighborhood population in 2016. It tells the association between (counts of break and enter in 2016)  and each neighborhood's population in 2016. From the above graphs, we could tell whether there is a relationship between X and Y or not.
 
-Many factors affect counts of break and enter in 2016 beside each neighborhood's population. If we only analyze population and counts of break and enter in 2016, we can't tell whether the population affect counts of break and enter in 2016 or not. In future work, we need to find the recent five years of data to analyze their relationship. 
+However, there are some limitations of data. Many factors affect counts of break and enter in 2016 beside each neighborhood's population. If we only analyze population and counts of break and enter in 2016, we can't tell whether the population affect counts of break and enter in 2016 or not. In future work, we need to find the recent five years of data to analyze their relationship. 
 
-Outline of the paper:    I Introduction 
+Outline of the paper:    I Introduction
                          - Major specific finding
                          - How to find the finding
                          - The limitation of data
+                         
                          II Data
                          - describe data background
                          - describe data parameters 
+                         
                          III Graphs
                          - create a histogram 
                          - create a boxplot
+                         
                          IV Description 
                          - discuss histogram 
                          - discuss scatter plot
+                         
                          V Reference 
                           
+                         
+                         
+
+                         
+                         
                        
                          
 # Part II Data 
-```{r}
-install.packages("opendatatoronto")
-install.packages("dplyr")
+```{r,echo=FALSE}
 library(opendatatoronto)
 library(dplyr)
 
@@ -55,8 +62,6 @@ datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'
 
 # load the first datastore resource as a sample
 data <- filter(datastore_resources, row_number()==1) %>% get_resource()
-data
-
 glimpse(data)
 ```
 
@@ -88,7 +93,9 @@ AutoTheft_CHG: % Change in auto thefts from 2018-2019
 
 AutoTheft_Rate_2019: Rate of auto thefts for 2019 per 100,000 population
 
-BreakandEnter_2014/BreakandEnter_2015/BreakandEnter_2016/BreakandEnter_2017/BreakandEnter_2018/BreakandEnter_2019: Count of break and enters for 2014/2015/2016/2017/2018/2019 respectively.
+BreakandEnter_2014/BreakandEnter_2015/BreakandEnter_2016/BreakandEnter_2017/
+BreakandEnter_2018/BreakandEnter_2019: Count of break and enters for 
+2014/2015/2016/2017/2018/2019 respectively.
 
 BreakandEnter_AVG:Averate break and enters from 2014-2019
 
@@ -96,7 +103,8 @@ BreakandEnter_CHG: % Change in break and enters from 2018-2019
 
 BreakandEnter_Rate_2019: Rate of break and enters for 2019 per 100,000 population
 
-Homicide_2014/Homicide_2015/Homicide_2016/Homicide_2017/Homicide_2018/Homicide_2019: Count of homicides for 2014/2015/2016/2017/2018/2019 respectively.
+Homicide_2014/Homicide_2015/Homicide_2016/Homicide_2017/Homicide_2018
+/Homicide_2019: Count of homicides for 2014/2015/2016/2017/2018/2019 respectively.
 
 Homicide_AVG: Averate homicides from 2014-2019
 
@@ -104,7 +112,8 @@ Homicide_CHG: % Change in homicides from 2018-2019
 
 Homicide_Rate_2019: Rate of homicides for 2019 per 100,000 population
 
-Robbery_2014/Robbery_2015/Robbery_2016/Robbery_2017/Robbery_2018/Robbery_2019: Count of robberies for 2014/2015/2016/2017/2018/2019 respectively.
+Robbery_2014/Robbery_2015/Robbery_2016/Robbery_2017/Robbery_2018
+/Robbery_2019: Count of robberies for 2014/2015/2016/2017/2018/2019 respectively.
 
 Robbery_AVG: Averate robberies from 2014-2019
 
@@ -112,7 +121,9 @@ Robbery_CHG: % Change in robberies from 2018-2019
 
 Robbery_Rate_2019: Rate of robberies for 2019 per 100,000 population
 
-TheftOver_2014/TheftOver_2015/TheftOver_2016/TheftOver_2017/TheftOver_2018/TheftOver_2019: Count of thefts over for 2014/2015/2016/2017/2018/2019 respectively.
+TheftOver_2014/TheftOver_2015/TheftOver_2016/TheftOver_2017
+/TheftOver_2018/TheftOver_2019: Count of thefts over for 
+2014/2015/2016/2017/2018/2019 respectively.
 
 TheftOver_AVG: Averate thefts over from 2014-2019
 
@@ -127,32 +138,42 @@ Shape__Length: Autogenerated length measurement
 Geometry: the x and y coordinates of associated neighbourhood 
 
 # Part III Graphs
-```{r}
-install.packages("tidyverse")
-install.packages("ggplot2")
+```{r,echo=FALSE}
 library(ggplot2)
 library(tidyverse)
 
 Histogram <- ggplot(data = data, aes(x = BreakandEnter_2016)) + geom_histogram(color = "blue", fill = "white", bins = 30)
 Histogram + labs(x = "counts of break and enter for 2016", title = "The distribution of counts of break and enter for 2016" )
 
+counts_of_crime_mean <- mean(data$BreakandEnter_2016)
+counts_of_crime_median <- median(data$BreakandEnter_2016)
+center <- data.frame(counts_of_crime_median,counts_of_crime_mean)
+center
+
+counts_of_crime_sd <- sd(data$BreakandEnter_2016)
+
  scatter_plot <- ggplot(data, aes(x=Population, y=BreakandEnter_2016)) + 
   geom_point(shape=18, color="blue")+
   geom_smooth(method=lm,  linetype="dashed",
              color="darkred", fill="blue")
  scatter_plot + labs(x = "Population of each Neighbourhood in 2016", y = "counts of break and enter for 2016", title = "The relationship between Population and counts of break and enter for 2016") 
-
+ 
+ggplot(data = data, aes(x = Population,y = BreakandEnter_2016,group = 1)) + geom_boxplot(color = "red", fill = "white")
 
 ```
 
 # Part IV Description
 
-The above histogram shows a non-symmetric distribution. If the distribution cut in half, the left side frequency is higher than the right side frequency, Which means fewer neighborhoods have over 100 counts of break and enter. We find that the distribution of counts of break and enter for 2016 is heavily right-skewed. It is not an approximately normal distribution.
+The above histogram shows a non-symmetric distribution. If the distribution cut in half, the left side frequency is higher than the right side frequency.Which means more neighborhoods have less than 100 counts of break and enter. We find that the distribution of counts of break and enter for 2016 is heavily right-skewed. It is not an approximately normal distribution.
 
-We can describe the center of the distribution of counts of break and enter by analyzing mean and median since the distribution of break and enter counts is not approximately normal. We can describe the center by using the median. The left side has more frequency compared to the right side. The histogram shows the median range will approximately appear on the left side. We can say that the distribution of counts of break and enter is centered around a range of 30-50. The content of distribution of counts of break and enter is from 9 to 212. We can see that there is an outlier that is larger than 200. The outlier point means that one neighborhood in Toronto has over 200 counts of break and enter.
-The outlier is associated with the neighborhood of Waterfront Communities-The Island. It implies that Waterfront Communities-The Island is a dangerous place compared to other neighborhoods. 
+To describe the spread of the distribution of counts of break and enter, we calculate the standard deviation of counts of break and enter. Standard deviation represents the average distance away from the mean. Which means it shows how well the mean. The standard deviation of counts of break and enter is round 31.4212, which is larger than 0. The result tells the mean is not so representative of the data. 
 
-Using the above scatter plot, we find the relationship between population and (counts of break and enter) in 2016. The dotted line shows the strong positive linear line for population and (break and enter) in 2016. Each blue dots represent the counts of break and enter in each neighborhood. We also observe the outlier in the above scatter plot. There is one blue dot far from the positive linear line. It is considered an error because the population can't precisely predict counts of break and enter reality. Therefore, we can conclude a positive relationship between population, break, and enter counts. When each neighborhood's population in 2016 increased, the counts of break and enter in 2016 will also increase.
+We can describe the center of the distribution of counts of break and enter by analyzing mean and median. Since the distribution of break and enter counts is not approximately normal, we can describe the center by using the median. The mean and median for the counts of break and enter are 45.7 and 38, respectively. Therefore, we can tell that the distribution of the break and enter counts is centered at 38. 
+
+Using the above scatter plot, we find the relationship between population and (counts of break and enter) in 2016. The dotted line shows the strong positive linear line for population and (break and enter) in 2016. When each neighborhood's population in 2016 increased, the counts of break and enter in 2016 will also increase.
+
+We made a boxplot to identify any unusual population points and (counts of break and enter) in 2016. There are six red dots beyond the two variables' boxplot; it counts as unusual points or outliers. There is one red dot that is significantly larger than other outliers. It is larger than 200. This means that one neighborhood in Toronto has over 200 counts of break and enter. It is associated with the neighborhood of Waterfront Communities-The Island. It implies that Waterfront Communities-The Island is a dangerous place compared to other neighborhoods. 
+
 
 
 # Reference 

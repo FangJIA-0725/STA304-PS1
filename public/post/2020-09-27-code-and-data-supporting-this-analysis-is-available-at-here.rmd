@@ -34,11 +34,25 @@ library(tidyverse)
 
 Histogram <- ggplot(data = data, aes(x = BreakandEnter_2016)) + geom_histogram(color = "blue", fill = "white", bins = 30)
 Histogram + labs(x = "counts of break and enter for 2016", title = "The distribution of counts of break and enter for 2016" )
+counts_of_crime_mean <- mean(data$BreakandEnter_2016)
+counts_of_crime_median <- median(data$BreakandEnter_2016)
+center <- data.frame(counts_of_crime_median,counts_of_crime_mean)
+center
 
+counts_of_crime_sd <- sd(data$BreakandEnter_2016)
+```
+
+
+```{r}
  scatter_plot <- ggplot(data, aes(x=Population, y=BreakandEnter_2016)) + 
   geom_point(shape=18, color="blue")+
   geom_smooth(method=lm,  linetype="dashed",
              color="darkred", fill="blue")
  scatter_plot + labs(x = "Population of each Neighbourhood in 2016", y = "counts of break and enter for 2016", title = "The relationship between Population and counts of break and enter for 2016")
 ```
+```{r}
+ggplot(data = data, aes(x = Population,y = BreakandEnter_2016,group = 1)) + geom_boxplot(color = "red", fill = "white")
+```
+
+
 

@@ -62,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">12 min read</span>
+    <span class="article-duration">10 min read</span>
     
 
     <h1 class="article-title">The relationship between the population of each neighborhood and counts of break and enter in 2016.</h1>
@@ -77,35 +77,33 @@
 
 <div id="part-i-introduction" class="section level1">
 <h1>Part I Introduction</h1>
-<p>In this experiment, we focus on analyzing the relationship between two numerical variables. We select two interesting variables from the data we found on the Toronto Open Data Portal. Y is the counts of break and enter in 2016. X is the population of each neighborhood in 2016. We assume a relationship between (counts of break and enter in 2016) and each neighborhood’s population in 2016.</p>
-<p>Firstly, we create a histogram of counts of break and enter in 2016. It shows the distribution, center, and spread. Secondly, we make a scatter plot of (counts of break and enter in 2016) and each neighborhood population in 2016. It tells the association between (counts of break and enter in 2016) and each neighborhood’s population in 2016. From the above graphs, we could tell whether there is a relationship between X and Y.</p>
-<p>Many factors affect counts of break and enter in 2016 beside each neighborhood’s population. If we only analyze population and counts of break and enter in 2016, we can’t tell whether the population affect counts of break and enter in 2016 or not. In future work, we need to find the recent five years of data to analyze their relationship.</p>
+<p>In this experiment, we focus on analyzing the relationship between two numerical variables. We select two interesting variables from the data we found on the Toronto Open Data Portal. Y is the counts of break and enter in 2016. X is the population of each neighborhood in 2016. We assume there is a relationship between (counts of break and enter in 2016) and each neighborhood’s population in 2016.</p>
+<p>Firstly, we create a histogram of counts of break and enter in 2016. It shows the distribution, center, and spread. Secondly, we make a scatter plot of (counts of break and enter in 2016) and each neighborhood population in 2016. It tells the association between (counts of break and enter in 2016) and each neighborhood’s population in 2016. From the above graphs, we could tell whether there is a relationship between X and Y or not.</p>
+<p>However, there are some limitations of data. Many factors affect counts of break and enter in 2016 beside each neighborhood’s population. If we only analyze population and counts of break and enter in 2016, we can’t tell whether the population affect counts of break and enter in 2016 or not. In future work, we need to find the recent five years of data to analyze their relationship.</p>
 <p>Outline of the paper: I Introduction
 - Major specific finding
 - How to find the finding
-- The limitation of data
-II Data
-- describe data background
-- describe data parameters
-III Graphs
-- create a histogram
-- create a boxplot
-IV Description
-- discuss histogram
-- discuss scatter plot
-V Reference</p>
+- The limitation of data</p>
+<pre><code>                     II Data
+                     - describe data background
+                     - describe data parameters 
+                     
+                     III Graphs
+                     - create a histogram 
+                     - create a boxplot
+                     
+                     IV Description 
+                     - discuss histogram 
+                     - discuss scatter plot
+                     
+                     V Reference 
+                      
+                     
+                     </code></pre>
 </div>
 <div id="part-ii-data" class="section level1">
 <h1>Part II Data</h1>
-<pre class="r"><code>install.packages(&quot;opendatatoronto&quot;)
-## Installing package into &#39;/home/rstudio-user/R/x86_64-pc-linux-gnu-library/4.0&#39;
-## (as &#39;lib&#39; is unspecified)
-install.packages(&quot;dplyr&quot;)
-## Installing package into &#39;/home/rstudio-user/R/x86_64-pc-linux-gnu-library/4.0&#39;
-## (as &#39;lib&#39; is unspecified)
-library(opendatatoronto)
-library(dplyr)
-## 
+<pre><code>## 
 ## Attaching package: &#39;dplyr&#39;
 ## The following objects are masked from &#39;package:stats&#39;:
 ## 
@@ -113,66 +111,11 @@ library(dplyr)
 ## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union
-
-# get package
-package &lt;- show_package(&quot;fc4d95a6-591f-411f-af17-327e6c5d03c7&quot;)
-package
 ## # A tibble: 1 x 10
 ##   title id    topics civic_issues excerpt dataset_category num_resources formats
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;  
 ## 1 Neig… fc4d… &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;                         1 &lt;NA&gt;   
 ## # … with 2 more variables: refresh_rate &lt;chr&gt;, last_refreshed &lt;date&gt;
-
-# get all resources for this package
-resources &lt;- list_package_resources(&quot;fc4d95a6-591f-411f-af17-327e6c5d03c7&quot;)
-
-# identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources
-datastore_resources &lt;- filter(resources, tolower(format) %in% c(&#39;csv&#39;, &#39;geojson&#39;))
-
-# load the first datastore resource as a sample
-data &lt;- filter(datastore_resources, row_number()==1) %&gt;% get_resource()
-data
-## Simple feature collection with 140 features and 61 fields
-## geometry type:  POLYGON
-## dimension:      XY
-## bbox:           xmin: -79.63923 ymin: 43.581 xmax: -79.1152 ymax: 43.85545
-## CRS:            EPSG:4326
-## # A tibble: 140 x 62
-##    `_id` OBJECTID Neighbourhood Hood_ID Population Assault_2014 Assault_2015
-##    &lt;int&gt;    &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;        &lt;int&gt;        &lt;int&gt;        &lt;int&gt;
-##  1     1       16 South Parkda… 085          21849          202          226
-##  2     2       17 South Riverd… 070          27876          215          207
-##  3     3       18 St.Andrew-Wi… 040          17812           53           41
-##  4     4       19 Taylor-Massey 061          15683          127           92
-##  5     5       20 Humber Summit 021          12416           76           89
-##  6     6       21 Humbermede    022          15545          117          132
-##  7     7       22 Centennial S… 133          13362           50           39
-##  8     8       23 Church-Yonge… 075          31340          480          495
-##  9     9       24 Clairlea-Bir… 120          26984          247          259
-## 10    10       25 Cliffcrest    123          15935           79           97
-## # … with 130 more rows, and 55 more variables: Assault_2016 &lt;int&gt;,
-## #   Assault_2017 &lt;int&gt;, Assault_2018 &lt;int&gt;, Assault_2019 &lt;int&gt;,
-## #   Assault_AVG &lt;dbl&gt;, Assault_CHG &lt;dbl&gt;, Assault_Rate_2019 &lt;dbl&gt;,
-## #   AutoTheft_2014 &lt;int&gt;, AutoTheft_2015 &lt;int&gt;, AutoTheft_2016 &lt;int&gt;,
-## #   AutoTheft_2017 &lt;int&gt;, AutoTheft_2018 &lt;int&gt;, AutoTheft_2019 &lt;int&gt;,
-## #   AutoTheft_AVG &lt;dbl&gt;, AutoTheft_CHG &lt;dbl&gt;, AutoTheft_Rate_2019 &lt;dbl&gt;,
-## #   BreakandEnter_2014 &lt;int&gt;, BreakandEnter_2015 &lt;int&gt;,
-## #   BreakandEnter_2016 &lt;int&gt;, BreakandEnter_2017 &lt;int&gt;,
-## #   BreakandEnter_2018 &lt;int&gt;, BreakandEnter_2019 &lt;int&gt;,
-## #   BreakandEnter_AVG &lt;dbl&gt;, BreakandEnter_CHG &lt;dbl&gt;,
-## #   BreakandEnter_Rate_2019 &lt;dbl&gt;, Homicide_2014 &lt;int&gt;, Homicide_2015 &lt;int&gt;,
-## #   Homicide_2016 &lt;int&gt;, Homicide_2017 &lt;int&gt;, Homicide_2018 &lt;int&gt;,
-## #   Homicide_2019 &lt;int&gt;, Homicide_AVG &lt;dbl&gt;, Homicide_CHG &lt;dbl&gt;,
-## #   Homicide_Rate_2019 &lt;dbl&gt;, Robbery_2014 &lt;int&gt;, Robbery_2015 &lt;int&gt;,
-## #   Robbery_2016 &lt;int&gt;, Robbery_2017 &lt;int&gt;, Robbery_2018 &lt;int&gt;,
-## #   Robbery_2019 &lt;int&gt;, Robbery_AVG &lt;dbl&gt;, Robbery_CHG &lt;dbl&gt;,
-## #   Robbery_Rate_2019 &lt;dbl&gt;, TheftOver_2014 &lt;int&gt;, TheftOver_2015 &lt;int&gt;,
-## #   TheftOver_2016 &lt;int&gt;, TheftOver_2017 &lt;int&gt;, TheftOver_2018 &lt;int&gt;,
-## #   TheftOver_2019 &lt;int&gt;, TheftOver_AVG &lt;dbl&gt;, TheftOver_CHG &lt;dbl&gt;,
-## #   TheftOver_Rate_2019 &lt;dbl&gt;, Shape__Area &lt;dbl&gt;, Shape__Length &lt;dbl&gt;,
-## #   geometry &lt;POLYGON [°]&gt;
-
-glimpse(data)
 ## Rows: 140
 ## Columns: 62
 ## $ `_id`                   &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14…
@@ -251,19 +194,25 @@ glimpse(data)
 <p>AutoTheft_AVG: Averate auto thefts from 2014-2019</p>
 <p>AutoTheft_CHG: % Change in auto thefts from 2018-2019</p>
 <p>AutoTheft_Rate_2019: Rate of auto thefts for 2019 per 100,000 population</p>
-<p>BreakandEnter_2014/BreakandEnter_2015/BreakandEnter_2016/BreakandEnter_2017/BreakandEnter_2018/BreakandEnter_2019: Count of break and enters for 2014/2015/2016/2017/2018/2019 respectively.</p>
+<p>BreakandEnter_2014/BreakandEnter_2015/BreakandEnter_2016/BreakandEnter_2017/
+BreakandEnter_2018/BreakandEnter_2019: Count of break and enters for
+2014/2015/2016/2017/2018/2019 respectively.</p>
 <p>BreakandEnter_AVG:Averate break and enters from 2014-2019</p>
 <p>BreakandEnter_CHG: % Change in break and enters from 2018-2019</p>
 <p>BreakandEnter_Rate_2019: Rate of break and enters for 2019 per 100,000 population</p>
-<p>Homicide_2014/Homicide_2015/Homicide_2016/Homicide_2017/Homicide_2018/Homicide_2019: Count of homicides for 2014/2015/2016/2017/2018/2019 respectively.</p>
+<p>Homicide_2014/Homicide_2015/Homicide_2016/Homicide_2017/Homicide_2018
+/Homicide_2019: Count of homicides for 2014/2015/2016/2017/2018/2019 respectively.</p>
 <p>Homicide_AVG: Averate homicides from 2014-2019</p>
 <p>Homicide_CHG: % Change in homicides from 2018-2019</p>
 <p>Homicide_Rate_2019: Rate of homicides for 2019 per 100,000 population</p>
-<p>Robbery_2014/Robbery_2015/Robbery_2016/Robbery_2017/Robbery_2018/Robbery_2019: Count of robberies for 2014/2015/2016/2017/2018/2019 respectively.</p>
+<p>Robbery_2014/Robbery_2015/Robbery_2016/Robbery_2017/Robbery_2018
+/Robbery_2019: Count of robberies for 2014/2015/2016/2017/2018/2019 respectively.</p>
 <p>Robbery_AVG: Averate robberies from 2014-2019</p>
 <p>Robbery_CHG: % Change in robberies from 2018-2019</p>
 <p>Robbery_Rate_2019: Rate of robberies for 2019 per 100,000 population</p>
-<p>TheftOver_2014/TheftOver_2015/TheftOver_2016/TheftOver_2017/TheftOver_2018/TheftOver_2019: Count of thefts over for 2014/2015/2016/2017/2018/2019 respectively.</p>
+<p>TheftOver_2014/TheftOver_2015/TheftOver_2016/TheftOver_2017
+/TheftOver_2018/TheftOver_2019: Count of thefts over for
+2014/2015/2016/2017/2018/2019 respectively.</p>
 <p>TheftOver_AVG: Averate thefts over from 2014-2019</p>
 <p>TheftOver_CHG: % Change in thefts over from 2018-2019</p>
 <p>TheftOver_Rate_2019:Rate of thefts over for 2019 per 100,000 population</p>
@@ -273,40 +222,26 @@ glimpse(data)
 </div>
 <div id="part-iii-graphs" class="section level1">
 <h1>Part III Graphs</h1>
-<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
-## Installing package into &#39;/home/rstudio-user/R/x86_64-pc-linux-gnu-library/4.0&#39;
-## (as &#39;lib&#39; is unspecified)
-install.packages(&quot;ggplot2&quot;)
-## Installing package into &#39;/home/rstudio-user/R/x86_64-pc-linux-gnu-library/4.0&#39;
-## (as &#39;lib&#39; is unspecified)
-library(ggplot2)
-library(tidyverse)
-## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 ## ✓ tibble  3.0.3     ✓ purrr   0.3.4
 ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
 ## ✓ readr   1.3.1     ✓ forcats 0.5.0
-## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ─────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-
-Histogram &lt;- ggplot(data = data, aes(x = BreakandEnter_2016)) + geom_histogram(color = &quot;blue&quot;, fill = &quot;white&quot;, bins = 30)
-Histogram + labs(x = &quot;counts of break and enter for 2016&quot;, title = &quot;The distribution of counts of break and enter for 2016&quot; )</code></pre>
+## x dplyr::lag()    masks stats::lag()</code></pre>
 <p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code>
- scatter_plot &lt;- ggplot(data, aes(x=Population, y=BreakandEnter_2016)) + 
-  geom_point(shape=18, color=&quot;blue&quot;)+
-  geom_smooth(method=lm,  linetype=&quot;dashed&quot;,
-             color=&quot;darkred&quot;, fill=&quot;blue&quot;)
- scatter_plot + labs(x = &quot;Population of each Neighbourhood in 2016&quot;, y = &quot;counts of break and enter for 2016&quot;, title = &quot;The relationship between Population and counts of break and enter for 2016&quot;) 
+<pre><code>##   counts_of_crime_median counts_of_crime_mean
+## 1                     38                 45.7
 ## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-2.png" width="672" /><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
 </div>
 <div id="part-iv-description" class="section level1">
 <h1>Part IV Description</h1>
-<p>The above histogram shows a non-symmetric distribution. If the distribution cut in half, the left side frequency is higher than the right side frequency, Which means fewer neighborhoods have over 100 counts of break and enter. We find that the distribution of counts of break and enter for 2016 is heavily right-skewed. It is not an approximately normal distribution.</p>
-<p>We can describe the center of the distribution of counts of break and enter by analyzing mean and median since the distribution of break and enter counts is not approximately normal. We can describe the center by using the median. The left side has more frequency compared to the right side. The histogram shows the median range will approximately appear on the left side. We can say that the distribution of counts of break and enter is centered around a range of 30-50. The content of distribution of counts of break and enter is from 9 to 212. We can see that there is an outlier that is larger than 200. The outlier point means that one neighborhood in Toronto has over 200 counts of break and enter.
-The outlier is associated with the neighborhood of Waterfront Communities-The Island. It implies that Waterfront Communities-The Island is a dangerous place compared to other neighborhoods.</p>
-<p>Using the above scatter plot, we find the relationship between population and (counts of break and enter) in 2016. The dotted line shows the strong positive linear line for population and (break and enter) in 2016. Each blue dots represent the counts of break and enter in each neighborhood. We also observe the outlier in the above scatter plot. There is one blue dot far from the positive linear line. It is considered an error because the population can’t precisely predict counts of break and enter reality. Therefore, we can conclude a positive relationship between population, break, and enter counts. When each neighborhood’s population in 2016 increased, the counts of break and enter in 2016 will also increase.</p>
+<p>The above histogram shows a non-symmetric distribution. If the distribution cut in half, the left side frequency is higher than the right side frequency.Which means more neighborhoods have less than 100 counts of break and enter. We find that the distribution of counts of break and enter for 2016 is heavily right-skewed. It is not an approximately normal distribution.</p>
+<p>To describe the spread of the distribution of counts of break and enter, we calculate the standard deviation of counts of break and enter. Standard deviation represents the average distance away from the mean. Which means it shows how well the mean. The standard deviation of counts of break and enter is round 31.4212, which is larger than 0. The result tells the mean is not so representative of the data.</p>
+<p>We can describe the center of the distribution of counts of break and enter by analyzing mean and median. Since the distribution of break and enter counts is not approximately normal, we can describe the center by using the median. The mean and median for the counts of break and enter are 45.7 and 38, respectively. Therefore, we can tell that the distribution of the break and enter counts is centered at 38.</p>
+<p>Using the above scatter plot, we find the relationship between population and (counts of break and enter) in 2016. The dotted line shows the strong positive linear line for population and (break and enter) in 2016. When each neighborhood’s population in 2016 increased, the counts of break and enter in 2016 will also increase.</p>
+<p>We made a boxplot to identify any unusual population points and (counts of break and enter) in 2016. There are six red dots beyond the two variables’ boxplot; it counts as unusual points or outliers. There is one red dot that is significantly larger than other outliers. It is larger than 200. This means that one neighborhood in Toronto has over 200 counts of break and enter. It is associated with the neighborhood of Waterfront Communities-The Island. It implies that Waterfront Communities-The Island is a dangerous place compared to other neighborhoods.</p>
 </div>
 <div id="reference" class="section level1">
 <h1>Reference</h1>

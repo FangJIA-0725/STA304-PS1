@@ -22,7 +22,7 @@
       <pubDate>Thu, 24 Sep 2020 21:13:14 -0500</pubDate>
       
       <guid>/2020/09/24/the-relationship-between-the-population-of-each-neighborhood-and-counts-of-break-and-enter-in-2016./</guid>
-      <description>Part I Introduction In this experiment, we focus on analyzing the relationship between two numerical variables. We select two interesting variables from the data we found on the Toronto Open Data Portal. Y is the counts of break and enter in 2016. X is the population of each neighborhood in 2016. We assume a relationship between (counts of break and enter in 2016) and each neighborhood’s population in 2016.</description>
+      <description>Part I Introduction In this experiment, we focus on analyzing the relationship between two numerical variables. We select two interesting variables from the data we found on the Toronto Open Data Portal. Y is the counts of break and enter in 2016. X is the population of each neighborhood in 2016. We assume there is a relationship between (counts of break and enter in 2016) and each neighborhood’s population in 2016.</description>
     </item>
     
   </channel>
