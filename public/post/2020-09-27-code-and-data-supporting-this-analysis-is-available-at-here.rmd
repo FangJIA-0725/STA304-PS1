@@ -40,6 +40,7 @@ center <- data.frame(counts_of_crime_median,counts_of_crime_mean)
 center
 
 counts_of_crime_sd <- sd(data$BreakandEnter_2016)
+counts_of_crime_sd 
 ```
 
 

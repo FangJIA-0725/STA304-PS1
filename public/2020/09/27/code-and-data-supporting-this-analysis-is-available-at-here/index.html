@@ -224,7 +224,9 @@ center &lt;- data.frame(counts_of_crime_median,counts_of_crime_mean)
 center</code></pre>
 <pre><code>##   counts_of_crime_median counts_of_crime_mean
 ## 1                     38                 45.7</code></pre>
-<pre class="r"><code>counts_of_crime_sd &lt;- sd(data$BreakandEnter_2016)</code></pre>
+<pre class="r"><code>counts_of_crime_sd &lt;- sd(data$BreakandEnter_2016)
+counts_of_crime_sd </code></pre>
+<pre><code>## [1] 31.42118</code></pre>
 <pre class="r"><code> scatter_plot &lt;- ggplot(data, aes(x=Population, y=BreakandEnter_2016)) + 
   geom_point(shape=18, color=&quot;blue&quot;)+
   geom_smooth(method=lm,  linetype=&quot;dashed&quot;,
