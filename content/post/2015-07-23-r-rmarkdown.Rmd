@@ -19,32 +19,37 @@ Firstly, we create a histogram of counts of break and enter in 2016. It shows th
 
 However, there are some limitations of data. Many factors affect counts of break and enter in 2016 beside each neighborhood's population. If we only analyze population and counts of break and enter in 2016, we can't tell whether the population affect counts of break and enter in 2016 or not. In future work, we need to find the recent five years of data to analyze their relationship. 
 
-Outline of the paper:    I Introduction
-                         - Major specific finding
-                         - How to find the finding
-                         - The limitation of data
-                         
-                         II Data
-                         - describe data background
-                         - describe data parameters 
-                         
-                         III Graphs
-                         - create a histogram 
-                         - create a boxplot
-                         
-                         IV Description 
-                         - discuss histogram 
-                         - discuss scatter plot
-                         
-                         V Reference 
-                          
-                         
-                         
+Outline of the paper:  
 
+                      I Introduction 
+
+                        - Major specific finding 
+                        
+                        - How to find the finding 
+                        
+                        - The limitation of data 
+                        
+                      II Data 
+
+                        - describe data background  
+                        
+                        - describe data parameters 
                          
+                      III Graphs 
+                      
+                        - create a histogram 
+                        
+                        - create a boxplot
                          
-                       
+                      IV Description 
+                      
+                        - discuss histogram 
+                        
+                        - discuss scatter plot
                          
+                       V Reference 
+
+                        
 # Part II Data 
 ```{r,echo=FALSE}
 library(opendatatoronto)
@@ -151,7 +156,7 @@ center <- data.frame(counts_of_crime_median,counts_of_crime_mean)
 center
 
 counts_of_crime_sd <- sd(data$BreakandEnter_2016)
-
+counts_of_crime_sd 
  scatter_plot <- ggplot(data, aes(x=Population, y=BreakandEnter_2016)) + 
   geom_point(shape=18, color="blue")+
   geom_smooth(method=lm,  linetype="dashed",
@@ -182,4 +187,5 @@ We made a boxplot to identify any unusual population points and (counts of break
 
 2.A Complete Guide to Scatter Plots. (n.d.). Retrieved September 27, 2020, from https://chartio.com/learn/charts/what-is-a-scatter-plot/
 
+3.Ggplot2 scatter plots : Quick start guide - R software and data visualization. (n.d.). Retrieved September 28, 2020, from http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
 

@@ -15,26 +15,34 @@ tags: ["R Markdown", "plot", "regression"]
 <p>In this experiment, we focus on analyzing the relationship between two numerical variables. We select two interesting variables from the data we found on the Toronto Open Data Portal. Y is the counts of break and enter in 2016. X is the population of each neighborhood in 2016. We assume there is a relationship between (counts of break and enter in 2016) and each neighborhood’s population in 2016.</p>
 <p>Firstly, we create a histogram of counts of break and enter in 2016. It shows the distribution, center, and spread. Secondly, we make a scatter plot of (counts of break and enter in 2016) and each neighborhood population in 2016. It tells the association between (counts of break and enter in 2016) and each neighborhood’s population in 2016. From the above graphs, we could tell whether there is a relationship between X and Y or not.</p>
 <p>However, there are some limitations of data. Many factors affect counts of break and enter in 2016 beside each neighborhood’s population. If we only analyze population and counts of break and enter in 2016, we can’t tell whether the population affect counts of break and enter in 2016 or not. In future work, we need to find the recent five years of data to analyze their relationship.</p>
-<p>Outline of the paper: I Introduction
-- Major specific finding
-- How to find the finding
-- The limitation of data</p>
-<pre><code>                     II Data
-                     - describe data background
-                     - describe data parameters 
+<p>Outline of the paper:</p>
+<pre><code>                  I Introduction 
+
+                    - Major specific finding 
+                    
+                    - How to find the finding 
+                    
+                    - The limitation of data 
+                    
+                  II Data 
+
+                    - describe data background  
+                    
+                    - describe data parameters 
                      
-                     III Graphs
-                     - create a histogram 
-                     - create a boxplot
+                  III Graphs 
+                  
+                    - create a histogram 
+                    
+                    - create a boxplot
                      
-                     IV Description 
-                     - discuss histogram 
-                     - discuss scatter plot
+                  IV Description 
+                  
+                    - discuss histogram 
+                    
+                    - discuss scatter plot
                      
-                     V Reference 
-                      
-                     
-                     </code></pre>
+                   V Reference </code></pre>
 </div>
 <div id="part-ii-data" class="section level1">
 <h1>Part II Data</h1>
@@ -167,6 +175,7 @@ BreakandEnter_2018/BreakandEnter_2019: Count of break and enters for
 <p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <pre><code>##   counts_of_crime_median counts_of_crime_mean
 ## 1                     38                 45.7
+## [1] 31.42118
 ## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-2.png" width="672" /><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
 </div>
@@ -182,4 +191,5 @@ BreakandEnter_2018/BreakandEnter_2019: Count of break and enters for
 <h1>Reference</h1>
 <p>1.Open Data Catalogue. (n.d.). Retrieved September 27, 2020, from <a href="https://open.toronto.ca/catalogue/?search=crime" class="uri">https://open.toronto.ca/catalogue/?search=crime</a></p>
 <p>2.A Complete Guide to Scatter Plots. (n.d.). Retrieved September 27, 2020, from <a href="https://chartio.com/learn/charts/what-is-a-scatter-plot/" class="uri">https://chartio.com/learn/charts/what-is-a-scatter-plot/</a></p>
+<p>3.Ggplot2 scatter plots : Quick start guide - R software and data visualization. (n.d.). Retrieved September 28, 2020, from <a href="http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization" class="uri">http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization</a></p>
 </div>
